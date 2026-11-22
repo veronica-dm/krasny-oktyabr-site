@@ -345,6 +345,7 @@ main > .booking { margin-block-end:0; }
  position:relative; display:block; flex:0 0 auto; padding:26px 7px;
  background:var(--holes) left 6px repeat-x,var(--holes) left bottom 6px repeat-x,#191919;
 }
+.frame[hidden] { display:none; }
 .frame:focus-visible { outline-offset:-4px; outline-color:#ffcf54; }
 
 .frame img { display:block; width:auto; height:var(--photo-height); max-width:none; object-fit:contain; }

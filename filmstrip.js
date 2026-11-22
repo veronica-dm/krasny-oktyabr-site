@@ -1,5 +1,8 @@
 const strip = document.querySelector('.photo-strip');
-const desktopMotion = matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)');
+const motionAllowed = matchMedia('(prefers-reduced-motion: no-preference)');
+const hoverAvailable = matchMedia('(hover: hover)');
+let touching = false;
+let resumeTimer = 0;
 let inView = false;
 const frames = [...strip.children];
 const copies = frames.map(frame => {
@@ -17,9 +20,10 @@ function updateStrip() {
   const widths = frames.map(frame => frame.getBoundingClientRect().width);
   const gap = parseFloat(getComputedStyle(strip).columnGap);
   const cycleWidth = widths.reduce((total, width) => total + width + gap, 0);
-  const canLoop = desktopMotion.matches && cycleWidth - Math.max(...widths) >= strip.clientWidth;
+  const canLoop = motionAllowed.matches && cycleWidth - Math.max(...widths) >= strip.clientWidth;
   for (const copy of copies) copy.hidden = !canLoop;
-  if (!desktopMotion.matches || strip.scrollWidth <= strip.clientWidth || !inView || document.hidden || strip.matches(':hover, :focus-within')) return;
+  const hovering = hoverAvailable.matches && strip.matches(':hover');
+  if (!motionAllowed.matches || !inView || document.hidden || touching || resumeTimer || hovering || strip.matches(':focus-visible') || strip.scrollWidth <= strip.clientWidth) return;
 
   let position = strip.scrollLeft;
   let lastTime;
@@ -47,7 +51,31 @@ new IntersectionObserver(([entry]) => {
   inView = entry.isIntersecting;
   updateStrip();
 }).observe(strip);
-desktopMotion.addEventListener('change', updateStrip);
+// Дождаться окончания инерции нативного свайпа перед возвратом к автопрокрутке.
+function resumeAfterSwipe() {
+  clearTimeout(resumeTimer);
+  resumeTimer = setTimeout(() => {
+    resumeTimer = 0;
+    updateStrip();
+  }, 400);
+}
+strip.addEventListener('touchstart', () => {
+  touching = true;
+  clearTimeout(resumeTimer);
+  resumeTimer = 0;
+  cancelAnimationFrame(animation);
+}, {passive:true});
+for (const event of ['touchend', 'touchcancel']) {
+  strip.addEventListener(event, e => {
+    touching = e.touches.length > 0;
+    if (!touching) resumeAfterSwipe();
+  }, {passive:true});
+}
+strip.addEventListener('scroll', () => {
+  if (resumeTimer) resumeAfterSwipe();
+}, {passive:true});
+motionAllowed.addEventListener('change', updateStrip);
+hoverAvailable.addEventListener('change', updateStrip);
 window.addEventListener('resize', updateStrip);
 document.addEventListener('visibilitychange', updateStrip);
 
