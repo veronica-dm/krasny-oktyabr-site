@@ -79,7 +79,7 @@ hoverAvailable.addEventListener('change', updateStrip);
 window.addEventListener('resize', updateStrip);
 document.addEventListener('visibilitychange', updateStrip);
 
-// Закрепляем только те листы, которые можно целиком прочесть в окне.
+// Высокий лист сначала прокручивается до нижнего края и только затем закрепляется.
 const stack = document.querySelector('.stops');
 const sheets = stack.querySelectorAll('li');
 stack.style.setProperty('--step-count', sheets.length);
@@ -89,7 +89,9 @@ function measureSheets() {
   const headerHeight = document.querySelector('.masthead').offsetHeight;
   const height = Math.max(...Array.from(sheets, sheet => sheet.offsetHeight));
   const lastInset = parseFloat(getComputedStyle(sheets[sheets.length - 1]).getPropertyValue('--sheet-top'));
-  stack.toggleAttribute('data-stack-fits', height + lastInset + 24 + headerHeight <= visibleHeight);
+  const firstInset = parseFloat(getComputedStyle(sheets[0]).getPropertyValue('--sheet-top'));
+  const top = Math.min(headerHeight + firstInset, visibleHeight - height - (lastInset - firstInset) - 4);
+  stack.style.setProperty('--stack-top', top + 'px');
 }
 const sheetSizes = new ResizeObserver(measureSheets);
 for (const sheet of sheets) sheetSizes.observe(sheet);
