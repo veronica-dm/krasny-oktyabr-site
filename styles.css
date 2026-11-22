@@ -836,3 +836,6 @@ main .guest-column {
 .workshop-section {margin:clamp(80px,12.5vw,180px) var(--margin);}
 .workshop-section > h2 {margin:0 0 clamp(16px,2vw,32px);max-width:none;text-align:left;font:400 clamp(28px,4.3vw,74px)/1.05 "Russo One",sans-serif;}
 .workshop-section > .illustrated {margin:0;}
+
+.school-trip .placard-copy {container-type:inline-size;}
+.school-trip #school-heading {font-size:min(clamp(32px,4.4vw,78px),13.3cqi);}
