@@ -52,15 +52,16 @@ window.addEventListener('resize', updateStrip);
 document.addEventListener('visibilitychange', updateStrip);
 
 // Закрепляем только те листы, которые можно целиком прочесть в окне.
-const sheets = document.querySelectorAll('.stops li');
+const stack = document.querySelector('.stops');
+const sheets = stack.querySelectorAll('li');
+stack.style.setProperty('--step-count', sheets.length);
 const page = document.querySelector("main");
 function measureSheets() {
   const visibleHeight = Math.min(window.innerHeight, page.clientHeight);
   const headerHeight = document.querySelector('.masthead').offsetHeight;
-  for (const sheet of sheets) {
-    const inset = parseFloat(getComputedStyle(sheet).getPropertyValue('--sheet-top'));
-    sheet.toggleAttribute('data-fits', sheet.offsetHeight + inset + 24 + headerHeight <= visibleHeight);
-  }
+  const height = Math.max(...Array.from(sheets, sheet => sheet.offsetHeight));
+  const lastInset = parseFloat(getComputedStyle(sheets[sheets.length - 1]).getPropertyValue('--sheet-top'));
+  stack.toggleAttribute('data-stack-fits', height + lastInset + 24 + headerHeight <= visibleHeight);
 }
 const sheetSizes = new ResizeObserver(measureSheets);
 for (const sheet of sheets) sheetSizes.observe(sheet);

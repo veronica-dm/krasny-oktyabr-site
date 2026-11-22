@@ -152,13 +152,15 @@ main > .booking { margin-block-end:0; }
 .stops li:nth-child(4) { --sheet-top:40px; }
 .stops li:nth-child(5) { --sheet-top:48px; }
 @media(min-height:600px) and (prefers-reduced-motion:no-preference) {
- .stops li { position:sticky; }
- /* Последнему листу нужен ход прокрутки внутри списка до выхода всей стопки. */
- .stops:has(> li:last-child[data-fits])::after {
-  content:""; height:clamp(120px,24svh,240px);
+ /* Отдельная строка даёт время прочесть последний шаг. У всех карточек общая точка открепления. */
+ .stops[data-stack-fits]::after {
+  content:""; grid-row:calc(var(--step-count) + 1); height:clamp(120px,24svh,240px);
  }
-
- .stops li[data-fits] { top:calc(var(--menu-height,64px) + var(--sheet-top)); }
+ .stops[data-stack-fits] {grid-template-rows:repeat(var(--step-count),1fr) auto;}
+ .stops[data-stack-fits] li {
+  position:sticky; top:calc(var(--menu-height,64px) + 16px);
+  transform:translateY(calc(var(--sheet-top) - 16px));
+ }
 }
 @media(max-width:760px) {
  .stops li { grid-template-columns:auto 1fr; gap:16px; padding:24px 18px; }
