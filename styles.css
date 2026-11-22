@@ -33,13 +33,13 @@ footer.spread { border:0; margin:0; padding:32px 5vw 84px; background:var(--ink)
 footer.spread h2 { max-width:100%; font-size:clamp(24px,3.4vw,52px); }
 .guide {
  margin:0; padding:clamp(30px,5vw,78px) 5vw;
- background:#fafafa url("Газетная бумага.png") repeat;
+ background:#fafafa url("image/newsprint.png") repeat;
  border-top:6px double var(--ink);
 }
 .guide .portrait { box-shadow:6px 6px 0 #191919; border:8px solid white; transform:rotate(-.7deg); }
-.guide blockquote { background-image:url("Газетная бумага.png"); }
+.guide blockquote { background-image:url("image/newsprint.png"); }
 #route h2 { border-bottom:4px double; padding-bottom:.22em; }
-#prices,.ticket { background-image:url("Газетная бумага.png"); }
+#prices,.ticket { background-image:url("image/newsprint.png"); }
 .watch { width:140px; padding:3px; display:grid; gap:0; border:1px solid #191919; transition:width .18s ease; }
 .watch .play { position:relative; width:100%; padding:0; border:0; display:block; background:#191919; }
 .watch video { display:block; width:100%; aspect-ratio:9/16; object-fit:cover; pointer-events:none; }
@@ -754,7 +754,7 @@ main .field-note,main .guest-column {padding-block:clamp(20px,3vw,44px);}
 /* Сгибы и потемневшие края цельного листа. */
 .front-page .actions, main > .guide.spread, main .offer-poster, main #prices, footer.colophon {
  background-color:var(--straw);
- background-image:linear-gradient(110deg,rgba(250,213,157,.12),rgba(250,213,157,.42) 52%,rgba(250,213,157,.1)),url("Бумага со сгибом.webp");
+ background-image:linear-gradient(110deg,rgba(250,213,157,.12),rgba(250,213,157,.42) 52%,rgba(250,213,157,.1)),url("image/folded-paper.webp");
  background-size:100% 100%; background-position:center;
 }
 main > .guide.spread { background-position:center top; }
@@ -795,7 +795,7 @@ main .masthead {
 }
 main section[id] {scroll-margin-top:calc(var(--menu-height,64px) + 12px);}
 main .guest-column {
- background:var(--straw) url("Бумага со сгибом.webp") center/100% 100%;
+ background:var(--straw) url("image/folded-paper.webp") center/100% 100%;
  padding:clamp(18px,3.5vw,58px);border-top:6px double var(--ink);border-bottom:2px solid;
  grid-template-columns:minmax(0,.85fr) minmax(0,1.65fr);
 }
@@ -828,7 +828,7 @@ main .guest-column {
 .poster h1 small {
  display:table;max-width:100%;padding:.32em .62em .34em;
  margin:0 0 .82em;
- color:var(--ink);background:var(--straw) url("Бумага со сгибом.webp") center/100% 100%;
+ color:var(--ink);background:var(--straw) url("image/folded-paper.webp") center/100% 100%;
  border-block:3px double var(--ink);
  font-size:clamp(16px,2.05vw,36px);line-height:1.12;letter-spacing:.015em;
 }
