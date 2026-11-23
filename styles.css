@@ -975,3 +975,29 @@ main .guest-column {
 .quiz .quiz-channels label {margin:3px 0;}
 .quiz .booking-status:empty {display:none;}
 @media(max-width:600px){.quiz nav button {flex:1;min-height:52px;}.quiz header img {width:50px;height:50px;}}
+
+/* Последняя полоса: общая шапка, иллюстрация и приглашение к подбору. */
+.footer-spread {
+ grid-template-columns:minmax(0,2fr) minmax(0,3fr);
+ align-items:center; gap:clamp(20px,2.4vw,34px) clamp(28px,5vw,72px);
+ padding-block:clamp(22px,3vw,44px);
+}
+.footer-byline {grid-column:1/-1;}
+.footer-spread .contact-print {width:min(100%,320px);margin:0;justify-self:center;}
+.footer-spread .footer-booking {
+ gap:14px; border-left:4px double var(--ink); padding-left:clamp(18px,3vw,44px);
+}
+.footer-booking h3 {
+ margin:0; font:400 clamp(24px,2.65vw,42px)/1.08 "Russo One",sans-serif;
+ color:var(--red);text-wrap:balance;
+}
+.footer-booking p {font-size:clamp(16px,1.35vw,21px);line-height:1.45;}
+@media(max-width:760px){
+ .footer-spread {grid-template-columns:minmax(0,1fr) auto;gap:20px 12px;}
+ .footer-byline {grid-column:1;}
+ .footer-spread .contact-print {width:clamp(74px,19vw,128px);}
+ .footer-spread .footer-booking {
+  grid-column:1/-1; width:100%; padding:16px 0 0;
+  border-left:0;border-top:3px double var(--ink);
+ }
+}
