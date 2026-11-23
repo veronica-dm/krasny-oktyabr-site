@@ -103,7 +103,7 @@ sheetSizes.observe(document.querySelector('.masthead'));
 // Один оттиск на заголовок раздела. На телефонах наблюдатель не запускается.
 const printMotion = matchMedia('(min-width:761px) and (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference)');
 if ('IntersectionObserver' in window) {
-  const titles = document.querySelectorAll('main h2');
+  const titles = document.querySelectorAll('#cover-title .name, main h2');
   const printed = new WeakSet();
   const observer = new IntersectionObserver(entries => {
     if (!printMotion.matches) return;
