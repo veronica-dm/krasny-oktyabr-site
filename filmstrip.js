@@ -100,13 +100,13 @@ window.addEventListener('resize', measureSheets);
 sheetSizes.observe(page);
 sheetSizes.observe(document.querySelector('.masthead'));
 
-// Каждый заголовок получает один короткий оттиск за просмотр страницы.
+// Каждый заголовок получает один проход печатной полосы за просмотр страницы.
 if ('IntersectionObserver' in window) {
   const headlineObserver = new IntersectionObserver(entries => {
     for (const entry of entries) {
       if (!entry.isIntersecting) continue;
       headlineObserver.unobserve(entry.target);
-      if (motionAllowed.matches) entry.target.classList.add('headline-impression');
+      if (motionAllowed.matches) entry.target.classList.add('headline-reveal');
     }
   }, {threshold:0.3});
   for (const title of document.querySelectorAll('.section-heading h2, #history-title, #workshop-title, #school-heading, #booking-heading')) {

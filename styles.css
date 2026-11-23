@@ -905,11 +905,25 @@ main .guest-column {
  #prices .section-heading h2 > span {display:block;}
  #prices .section-heading .section-flag {position:absolute;top:0;right:0;width:auto;}
 }
-/* Краска совмещается с основным набором при первом появлении рубрики. */
+/* Красная полоса открывает новую газетную рубрику по ходу чтения. */
 @media screen and (prefers-reduced-motion:no-preference) {
- .headline-impression {animation:register-ink 320ms cubic-bezier(.23,1,.32,1) both;}
- @keyframes register-ink {
-  from {transform:translate(-.055em,.045em);text-shadow:.085em -.035em 0 rgb(195 39 28 / 65%);}
-  to {transform:translate(0,0);text-shadow:0 0 0 transparent;}
+ .headline-reveal {
+  --press-pass:720ms cubic-bezier(.33,0,.2,1);
+  position:relative;
+  animation:print-heading var(--press-pass);
+ }
+ .headline-reveal::after {
+  content:"";position:absolute;inset:0;pointer-events:none;
+  border-right:clamp(6px,.16em,14px) solid var(--red);
+  opacity:0;animation:print-edge var(--press-pass);
+ }
+ @keyframes print-heading {
+  from {clip-path:inset(-.25em 100% -.25em -.25em);}
+  to {clip-path:inset(-.25em 0 -.25em -.25em);}
+ }
+ @keyframes print-edge {
+  from {transform:translateX(-100%);opacity:1;}
+  85% {opacity:1;}
+  to {transform:translateX(0);opacity:0;}
  }
 }
