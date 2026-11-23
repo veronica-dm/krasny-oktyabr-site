@@ -48,8 +48,9 @@ button { background:var(--ink); color:white; border:0; padding:10px 16px; font:i
  .actions { display:grid; gap:18px; padding:20px 5vw; }
 }
 .masthead { margin:0 4vw; padding:16px 0; display:flex; align-items:center; justify-content:space-between; border-bottom:4px double var(--ink); }
-.masthead strong { font:600 18px "Golos Text",sans-serif; }
+.masthead .city-mark { font:600 18px "Golos Text",sans-serif; }
 .masthead nav { gap:clamp(12px,3vw,48px); font-size:15px; }
+.masthead a.city-mark { padding:0; }
 .masthead a { text-decoration:none; padding:6px 0; }
 .masthead a:hover { text-decoration:underline; }
 .poster { margin:20px 4vw; min-height:clamp(340px,51svh,590px); grid-template-columns:minmax(0,55fr) minmax(0,45fr); }
@@ -60,7 +61,7 @@ figcaption { position:static; padding:8px 0 0; font:400 14px "Golos Text",sans-s
 .actions { margin:0 4vw; padding:22px 0; background:white; border-top:2px solid var(--ink); border-bottom:1px solid var(--ink); }
 @media(max-width:760px){
  .masthead { flex-wrap:wrap; gap:4px 16px; padding:10px 0; }
- .masthead strong { font-size:16px; }
+ .masthead .city-mark { font-size:16px; }
  .masthead nav { gap:14px; font-size:14px; }
  .poster { margin:12px 5vw; min-height:0; }
  h1 { padding:8px 0 18px; }
@@ -102,7 +103,7 @@ footer.spread { padding-bottom:100px; }
 [hidden] { display:none!important; }
 dialog video { display:block; max-height:65svh; width:100%; }
 @media(max-width:760px){.spread{margin-inline:5vw}.report,.guide,.faq,.booking,.tariffs{grid-template-columns:1fr}.byline img{max-height:220px;width:auto;max-width:100%}.price+.price{border-left:0;border-top:1px solid}.guide blockquote{margin-top:12px}.price{padding-inline:0}.watch{left:6px;bottom:6px} }
-</style><link rel="stylesheet" href="styles.css?v=99d6c1c038"><main><header class="masthead"><strong class="city-mark"><span class="edition-mark" aria-hidden="true">★</span><span>Экскурсия по фабрике «Красный Октябрь»</span></strong><nav aria-label="Основное меню"><a href="#route">Программа</a><a href="#prices">Цены</a><a href="#contact">Записаться <span aria-hidden="true" class="arrow-icon"></span></a></nav></header>
+</style><link rel="stylesheet" href="styles.css?v=99d6c1c038"><main><header class="masthead"><a class="city-mark" href="./index.html" aria-label="Экскурсия по фабрике «Красный Октябрь» — на главную"><span class="edition-mark" aria-hidden="true">★</span><span>Экскурсия по фабрике «Красный Октябрь»</span></a><nav aria-label="Основное меню"><a href="#route">Программа</a><a href="#prices">Цены</a><a href="#contact">Записаться <span aria-hidden="true" class="arrow-icon"></span></a></nav></header>
 <section class="front-page" aria-labelledby="cover-title"><div class="poster">
 <h1 id="cover-title" aria-label="Экскурсия по фабрике «Красный Октябрь»"><small><span class="rubric-text">Экскурсия по фабрике</span></small><span class="name"><print-ink>КРАСНЫЙ<br>ОКТЯБРЬ</print-ink></span></h1>
 <figure class="press-photo"><img src="image/factory.webp" width="1680" height="1122" alt="Краснокирпичные корпуса фабрики «Красный Октябрь» на Берсеневской набережной, вид с Москвы-реки"><figcaption>Берсеневская набережная · Москва</figcaption></figure>
