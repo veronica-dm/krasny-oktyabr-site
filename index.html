@@ -102,7 +102,7 @@ footer.spread { padding-bottom:100px; }
 [hidden] { display:none!important; }
 dialog video { display:block; max-height:65svh; width:100%; }
 @media(max-width:760px){.spread{margin-inline:5vw}.report,.guide,.faq,.booking,.tariffs{grid-template-columns:1fr}.byline img{max-height:220px;width:auto;max-width:100%}.price+.price{border-left:0;border-top:1px solid}.guide blockquote{margin-top:12px}.price{padding-inline:0}.watch{left:6px;bottom:6px} }
-</style><link rel="stylesheet" href="styles.css"><main><header class="masthead"><strong class="city-mark"><span class="edition-mark" aria-hidden="true">★</span><span>Экскурсия по фабрике «Красный Октябрь»</span></strong><nav aria-label="Основное меню"><a href="#route">Программа</a><a href="#prices">Цены</a><a href="#contact">Записаться <span aria-hidden="true" class="arrow-icon"></span></a></nav></header>
+</style><link rel="stylesheet" href="styles.css?v=465263d30f"><main><header class="masthead"><strong class="city-mark"><span class="edition-mark" aria-hidden="true">★</span><span>Экскурсия по фабрике «Красный Октябрь»</span></strong><nav aria-label="Основное меню"><a href="#route">Программа</a><a href="#prices">Цены</a><a href="#contact">Записаться <span aria-hidden="true" class="arrow-icon"></span></a></nav></header>
 <section class="front-page" aria-labelledby="cover-title"><div class="poster">
 <h1 id="cover-title" aria-label="Экскурсия по фабрике «Красный Октябрь»"><small>Экскурсия по фабрике</small><span class="name">КРАСНЫЙ<br>ОКТЯБРЬ</span></h1>
 <figure class="press-photo"><img src="image/factory.webp" width="1680" height="1122" alt="Краснокирпичные корпуса фабрики «Красный Октябрь» на Берсеневской набережной, вид с Москвы-реки"><figcaption>Берсеневская набережная · Москва</figcaption></figure>
@@ -200,11 +200,15 @@ dialog video { display:block; max-height:65svh; width:100%; }
 <section class="spread booking" id="contact" aria-labelledby="booking-heading">
   <div class="coupon-cover">
     <h2 id="booking-heading">На какой день вы планируете экскурсию?</h2>
-    <p>Укажите удобную дату, число гостей и контакт для ответа. Гид свяжется с вами, чтобы согласовать детали.</p>
+    <p>Оставьте имя и телефон для связи. Дату, формат и число гостей можно уточнить позже. Гид свяжется с вами, чтобы согласовать детали.</p>
     <img class="coupon-print" src="image/booking-poster.webp" width="1536" height="1024" loading="lazy" alt="Плакат с видом на фабрику с реки. Над крышей вывеска «Красный Октябрь».">
   </div>
   <form class="ticket" method="post" action="/api/bookings" aria-labelledby="coupon-heading">
     <h3 id="coupon-heading">Запись на экскурсию</h3>
+    <div class="coupon-row">
+      <label>Имя<input name="name" type="text" autocomplete="given-name" maxlength="100" pattern=".*\S.*" required placeholder="Ваше имя"></label>
+      <label>Телефон<input name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="40" pattern="\+?(?:[\s\(\)\-]*[0-9]){7,15}[\s\)]*" title="Введите номер из 7–15 цифр, можно с кодом страны" required placeholder="+7 900 123-45-67"></label>
+    </div>
     <label>Формат экскурсии
       <select id="format" name="format"><option value="Хочу уточнить у гида">Хочу уточнить у гида</option><option>Сборная группа</option><option>Индивидуальная экскурсия</option><option value="На английском">На английском</option></select>
     </label>
@@ -212,7 +216,6 @@ dialog video { display:block; max-height:65svh; width:100%; }
       <label>Желаемая дата<input type="text" id="visit-date" name="date" maxlength="80" placeholder="Например, в субботу"></label>
       <label>Сколько гостей<input type="text" id="guests" name="guests" maxlength="80" placeholder="Например, 2 взрослых"></label>
     </div>
-    <label>Телефон или электронная почта<input name="replyTo" type="text" maxlength="160" required placeholder="Как с вами связаться?"></label>
     <label>Комментарий, если хотите<textarea id="comment" name="comment" maxlength="800" rows="2" placeholder="Ваши пожелания"></textarea></label>
     <div class="booking-permissions">
       <label><input type="checkbox" name="personalDataConsent" value="yes" required>Даю согласие на обработку моих персональных данных в соответствии с политикой конфиденциальности.</label>
