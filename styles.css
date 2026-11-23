@@ -30,7 +30,7 @@
 .ticket { border:0; border-left:2px dashed var(--ink); background:white; padding:clamp(20px,4vw,56px); }
 .ticket textarea,.ticket select { border:0; border-bottom:2px solid; background:#f4f4f3; }
 footer.spread { border:0; margin:0; padding:32px 5vw 84px; background:var(--ink); color:white; }
-footer.spread h2 { max-width:100%; font-size:clamp(24px,3.4vw,52px); }
+footer.spread h2 { max-width:100%; }
 .guide {
  margin:0; padding:clamp(30px,5vw,78px) 5vw;
  background:#fafafa url("image/newsprint.png") repeat;
@@ -492,7 +492,7 @@ footer.colophon {
 }
 @media(min-width:761px){
  .section-heading { grid-template-columns:minmax(0,7fr) minmax(0,3fr); }
- .spread .section-heading h2 { font-size:clamp(32px,3.85vw,62px); text-wrap:pretty; }
+ .spread .section-heading h2, .footer-byline h2 { font-size:clamp(32px,3.85vw,62px); text-wrap:pretty; }
 }
 
 
