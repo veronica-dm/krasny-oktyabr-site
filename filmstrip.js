@@ -100,16 +100,30 @@ window.addEventListener('resize', measureSheets);
 sheetSizes.observe(page);
 sheetSizes.observe(document.querySelector('.masthead'));
 
-// Каждый заголовок получает один проход печатной полосы за просмотр страницы.
+// Один оттиск на заголовок раздела. На телефонах наблюдатель не запускается.
+const printMotion = matchMedia('(min-width:761px) and (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference)');
 if ('IntersectionObserver' in window) {
-  const headlineObserver = new IntersectionObserver(entries => {
+  const titles = document.querySelectorAll('main h2');
+  const printed = new WeakSet();
+  const observer = new IntersectionObserver(entries => {
+    if (!printMotion.matches) return;
     for (const entry of entries) {
-      if (!entry.isIntersecting) continue;
-      headlineObserver.unobserve(entry.target);
-      if (motionAllowed.matches) entry.target.classList.add('headline-reveal');
+      if (!entry.isIntersecting || printed.has(entry.target)) continue;
+      printed.add(entry.target);
+      observer.unobserve(entry.target);
+      entry.target.classList.add('press-impression');
     }
-  }, {threshold:0.3});
-  for (const title of document.querySelectorAll('.section-heading h2, #history-title, #workshop-title, #school-heading, #booking-heading')) {
-    headlineObserver.observe(title);
+  }, {threshold:0.35});
+  function updatePrintMotion() {
+    observer.disconnect();
+    for (const title of titles) {
+      title.classList.remove('press-impression');
+      if (printMotion.matches && !printed.has(title)) observer.observe(title);
+    }
   }
+  document.addEventListener('animationend', event => {
+    if (event.animationName === 'ink-pressure') event.target.classList.remove('press-impression');
+  });
+  printMotion.addEventListener('change', updatePrintMotion);
+  updatePrintMotion();
 }

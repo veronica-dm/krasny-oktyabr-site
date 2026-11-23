@@ -905,25 +905,20 @@ main .guest-column {
  #prices .section-heading h2 > span {display:block;}
  #prices .section-heading .section-flag {position:absolute;top:0;right:0;width:auto;}
 }
-/* Красная полоса открывает новую газетную рубрику по ходу чтения. */
-@media screen and (prefers-reduced-motion:no-preference) {
- .headline-reveal {
-  --press-pass:720ms cubic-bezier(.33,0,.2,1);
-  position:relative;
-  animation:print-heading var(--press-pass);
+/* Валик заполняет пробелы в растре: контур всей строки виден с первого кадра. */
+@media screen and (min-width:761px) and (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
+ .press-impression {
+  mask-image:linear-gradient(90deg,black 44%,transparent 56%),
+             radial-gradient(circle,black 25%,rgba(0,0,0,.58) 45%);
+  mask-size:240% 100%,3px 3px;
+  mask-repeat:no-repeat,repeat;
+  animation:ink-pressure 1.25s ease-in-out both;
  }
- .headline-reveal::after {
-  content:"";position:absolute;inset:0;pointer-events:none;
-  border-right:clamp(6px,.16em,14px) solid var(--red);
-  opacity:0;animation:print-edge var(--press-pass);
+ @keyframes ink-pressure {
+  0%,12% {mask-position:100% 0,0 0;}
+  92%,100% {mask-position:0 0,0 0;}
  }
- @keyframes print-heading {
-  from {clip-path:inset(-.25em 100% -.25em -.25em);}
-  to {clip-path:inset(-.25em 0 -.25em -.25em);}
- }
- @keyframes print-edge {
-  from {transform:translateX(-100%);opacity:1;}
-  85% {opacity:1;}
-  to {transform:translateX(0);opacity:0;}
- }
+}
+@media (max-width:760px), (hover:none), (pointer:coarse) {
+ .front-page .name {animation:none;}
 }
