@@ -862,6 +862,7 @@ main .guest-column {
 
 .workshop-section {margin:clamp(80px,12.5vw,180px) var(--margin);}
 .workshop-section > h2 {margin:0 0 clamp(16px,2vw,32px);max-width:none;text-align:left;font:400 1em/1.05 "Russo One",sans-serif;}
+#route .section-heading {display:block;}
 #route .section-heading h2, #history-title, #workshop-title {font-size:clamp(32px,5.7vw,96px);}
 .workshop-section > .illustrated {margin:0;}
 
