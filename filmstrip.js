@@ -83,10 +83,27 @@ document.addEventListener('visibilitychange', updateStrip);
 const stack = document.querySelector('.stops');
 const sheets = stack.querySelectorAll('li');
 stack.style.setProperty('--step-count', sheets.length);
+sheets.forEach((sheet, index) => sheet.style.setProperty('--step-index', index));
 const page = document.querySelector("main");
 function measureSheets() {
   const visibleHeight = Math.min(window.innerHeight, page.clientHeight);
   const headerHeight = document.querySelector('.masthead').offsetHeight;
+  const style = getComputedStyle(stack);
+  const edge = parseFloat(style.getPropertyValue('--stack-edge'));
+  if (Number.isFinite(edge)) {
+    const top = headerHeight + parseFloat(style.getPropertyValue('--stack-gap'));
+    const room = visibleHeight - top - edge * (sheets.length - 1) - 8;
+    stack.style.setProperty('--stack-top', top + 'px');
+    stack.style.setProperty('--sheet-room', Math.max(0, room) + 'px');
+    // Если текст занял почти весь экран, иллюстрации читаются в обычной прокрутке.
+    const copyHeight = Math.max(...Array.from(sheets, sheet => {
+      const copy = sheet.querySelector('.stop-copy p');
+      return copy.getBoundingClientRect().bottom - sheet.getBoundingClientRect().top;
+    }));
+    stack.toggleAttribute('data-short', room < copyHeight + 110);
+    return;
+  }
+  stack.removeAttribute('data-short');
   const height = Math.max(...Array.from(sheets, sheet => sheet.offsetHeight));
   const lastInset = parseFloat(getComputedStyle(sheets[sheets.length - 1]).getPropertyValue('--sheet-top'));
   const firstInset = parseFloat(getComputedStyle(sheets[0]).getPropertyValue('--sheet-top'));

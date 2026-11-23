@@ -889,6 +889,21 @@ main .guest-column {
 }
 
 
+/* В мобильной стопке под меню видны равные полоски бумаги. */
+@media (max-width:760px) and (prefers-reduced-motion:no-preference) {
+ .stops { --stack-edge:14px; --stack-gap:20px; }
+ .stops li {
+  transform:translateY(calc(var(--step-index) * var(--stack-edge)));
+  padding-top:max(20px,var(--copy-inset));
+  max-height:var(--sheet-room); min-height:0;
+  grid-template-rows:auto auto minmax(0,1fr);
+ }
+ .stops .stop-photo { max-height:100%; min-height:0; }
+ .stops[data-short] { grid-template-rows:none; }
+ .stops[data-short] li { position:relative; top:auto; transform:none; max-height:none; }
+ .stops[data-short]::after { display:none; }
+}
+
 @media (max-width:760px) {
  :root {--mobile-button-height:56px;}
  main .press-button, .actions nav a.press-button:first-child,
