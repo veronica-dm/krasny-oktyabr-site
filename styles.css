@@ -989,7 +989,7 @@ main .guest-column {
 }
 .footer-booking h3 {
  margin:0; font:400 clamp(24px,2.65vw,42px)/1.08 "Russo One",sans-serif;
- color:var(--red);text-wrap:balance;
+ color:#ad201a;text-wrap:balance;
 }
 .footer-booking p {font-size:clamp(16px,1.35vw,21px);line-height:1.45;}
 @media(max-width:760px){
