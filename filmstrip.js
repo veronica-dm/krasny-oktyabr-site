@@ -94,13 +94,8 @@ function measureSheets() {
     const top = headerHeight + parseFloat(style.getPropertyValue('--stack-gap'));
     const room = visibleHeight - top - edge * (sheets.length - 1) - 8;
     stack.style.setProperty('--stack-top', top + 'px');
-    stack.style.setProperty('--sheet-room', Math.max(0, room) + 'px');
-    // Если текст занял почти весь экран, иллюстрации читаются в обычной прокрутке.
-    const copyHeight = Math.max(...Array.from(sheets, sheet => {
-      const copy = sheet.querySelector('.stop-copy p');
-      return copy.getBoundingClientRect().bottom - sheet.getBoundingClientRect().top;
-    }));
-    stack.toggleAttribute('data-short', room < copyHeight + 110);
+    const tallest = Math.max(...Array.from(sheets, sheet => sheet.offsetHeight));
+    stack.toggleAttribute('data-short', tallest > room);
     return;
   }
   stack.removeAttribute('data-short');
