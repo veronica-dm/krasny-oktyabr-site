@@ -122,7 +122,7 @@ if ('IntersectionObserver' in window) {
     }
   }
   document.addEventListener('animationend', event => {
-    if (event.animationName === 'ink-pressure') event.target.classList.remove('press-impression');
+    if (event.animationName === 'ink-pressure') event.target.parentElement.classList.remove('press-impression');
   });
   printMotion.addEventListener('change', updatePrintMotion);
   updatePrintMotion();
