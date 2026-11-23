@@ -36,10 +36,24 @@
   function updateChannel() {
     const channel = form.elements.channel.value;
     const needsHandle = ['Telegram', 'VK', 'WeChat'].includes(channel);
+    const phone = form.elements.phone;
+    phone.disabled = needsHandle;
+    phone.required = !needsHandle;
+    phone.parentElement.hidden = needsHandle;
+    phone.parentElement.querySelector('span').textContent =
+      channel === 'Телефон' ? 'Телефон' : 'Номер телефона в ' + channel;
     handle.disabled = !needsHandle;
+    handle.required = needsHandle;
     handle.parentElement.hidden = !needsHandle;
-    handle.parentElement.querySelector('span').textContent = 'Ваш контакт в ' + channel;
-    handle.placeholder = channel === 'Telegram' ? '@username' : 'Имя пользователя или ссылка';
+    handle.parentElement.querySelector('span').textContent = {
+      Telegram: 'Имя пользователя или ссылка в Telegram',
+      VK: 'Ссылка на профиль или короткое имя в VK',
+      WeChat: 'Ваш WeChat ID'
+    }[channel] || '';
+    if (handle.dataset.channel !== channel) handle.value = '';
+    handle.dataset.channel = channel;
+    handle.placeholder = {Telegram:'@username', VK:'vk.com/username', WeChat:'WeChat ID'}[channel] || '';
+    toggle.textContent = channels.hidden ? 'Использовать мессенджер' : 'Вернуться к звонку';
   }
 
   for (const link of document.querySelectorAll('[data-quiz]')) {
@@ -67,7 +81,7 @@
   toggle.addEventListener('click', () => {
     channels.hidden = !channels.hidden;
     toggle.setAttribute('aria-expanded', String(!channels.hidden));
-    if (channels.hidden) form.elements.channel.value = 'Телефон';
+    form.elements.channel.value = channels.hidden ? 'Телефон' : 'Telegram';
     updateChannel();
   });
   channels.addEventListener('change', updateChannel);

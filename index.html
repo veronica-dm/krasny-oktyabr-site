@@ -102,7 +102,7 @@ footer.spread { padding-bottom:100px; }
 [hidden] { display:none!important; }
 dialog video { display:block; max-height:65svh; width:100%; }
 @media(max-width:760px){.spread{margin-inline:5vw}.report,.guide,.faq,.booking,.tariffs{grid-template-columns:1fr}.byline img{max-height:220px;width:auto;max-width:100%}.price+.price{border-left:0;border-top:1px solid}.guide blockquote{margin-top:12px}.price{padding-inline:0}.watch{left:6px;bottom:6px} }
-</style><link rel="stylesheet" href="styles.css?v=a750a9c24c"><main><header class="masthead"><strong class="city-mark"><span class="edition-mark" aria-hidden="true">★</span><span>Экскурсия по фабрике «Красный Октябрь»</span></strong><nav aria-label="Основное меню"><a href="#route">Программа</a><a href="#prices">Цены</a><a href="#contact">Записаться <span aria-hidden="true" class="arrow-icon"></span></a></nav></header>
+</style><link rel="stylesheet" href="styles.css?v=19889351ea"><main><header class="masthead"><strong class="city-mark"><span class="edition-mark" aria-hidden="true">★</span><span>Экскурсия по фабрике «Красный Октябрь»</span></strong><nav aria-label="Основное меню"><a href="#route">Программа</a><a href="#prices">Цены</a><a href="#contact">Записаться <span aria-hidden="true" class="arrow-icon"></span></a></nav></header>
 <section class="front-page" aria-labelledby="cover-title"><div class="poster">
 <h1 id="cover-title" aria-label="Экскурсия по фабрике «Красный Октябрь»"><small><span class="rubric-text">Экскурсия по фабрике</span></small><span class="name"><print-ink>КРАСНЫЙ<br>ОКТЯБРЬ</print-ink></span></h1>
 <figure class="press-photo"><img src="image/factory.webp" width="1680" height="1122" alt="Краснокирпичные корпуса фабрики «Красный Октябрь» на Берсеневской набережной, вид с Москвы-реки"><figcaption>Берсеневская набережная · Москва</figcaption></figure>
@@ -276,25 +276,24 @@ dialog video { display:block; max-height:65svh; width:100%; }
   <form method="post" action="/api/bookings" novalidate>
     <input type="hidden" name="source">
     <span class="quiz-count" aria-live="polite">Шаг 1 из 4</span><progress max="4" value="0" aria-label="Прогресс подбора экскурсии"></progress>
-    <fieldset class="quiz-step"><legend tabindex="-1">Какой формат вам подходит?</legend>
+    <fieldset class="quiz-step"><legend tabindex="-1">Какую экскурсию для вас подобрать?</legend>
         <label class="quiz-option"><input type="radio" name="format" value="Сборная группа" required> Сборная группа</label>
         <label class="quiz-option"><input type="radio" name="format" value="Индивидуальная экскурсия" required> Индивидуальная экскурсия</label>
         <label class="quiz-option"><input type="radio" name="format" value="Для класса" required> Для класса</label>
         <label class="quiz-option"><input type="radio" name="format" value="На английском" required> На английском</label>
         <label class="quiz-option"><input type="radio" name="format" value="Хочу уточнить у гида" required> Хочу уточнить у гида</label>
     </fieldset>
-    <fieldset class="quiz-step" hidden><legend tabindex="-1">Сколько человек пойдёт на экскурсию?</legend>
+    <fieldset class="quiz-step" hidden><legend tabindex="-1">На сколько гостей ориентироваться гиду?</legend>
       <label>Число гостей<input type="number" name="guests" min="1" step="1" value="10" required></label>
       <input type="range" aria-label="Быстрый выбор числа гостей от 1 до 50" min="1" max="50" value="10">
     </fieldset>
-    <fieldset class="quiz-step" hidden><legend tabindex="-1">Когда планируете прогулку?</legend>
-        <label class="quiz-option"><input type="radio" name="timing" value="В ближайшие дни" required> В ближайшие дни</label>
-        <label class="quiz-option"><input type="radio" name="timing" value="Подберу удобное время" required> Подберу удобное время</label>
+    <fieldset class="quiz-step" hidden><legend tabindex="-1">Что подсказать вам по датам экскурсии?</legend>
+        <label class="quiz-option"><input type="radio" name="timing" value="Какие даты свободны в ближайшие дни?" required> Какие даты свободны в ближайшие дни?</label>
+        <label class="quiz-option"><input type="radio" name="timing" value="Хочу обсудить свободные даты с гидом" required> Хочу обсудить свободные даты с гидом</label>
         <label class="quiz-option"><input type="radio" name="timing" value="Пока присматриваюсь" required> Пока присматриваюсь</label>
     </fieldset>
     <fieldset class="quiz-step" hidden><legend tabindex="-1">Как с вами связаться?</legend>
       <label>Имя<input type="text" name="name" autocomplete="given-name" maxlength="100" required pattern=".*\S.*"></label>
-      <label>Телефон<input name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="40" pattern="\+?(?:[\s\(\)\-]*[0-9]){7,15}[\s\)]*" title="Введите номер из 7–15 цифр, можно с кодом страны" required placeholder="+7 900 123-45-67"></label>
       <button type="button" class="quiz-channel-toggle" aria-expanded="false" aria-controls="quiz-channels">Использовать мессенджер</button>
       <div id="quiz-channels" class="quiz-channels" hidden>
         <label class="quiz-option"><input type="radio" name="channel" value="Telegram"> Telegram</label>
@@ -305,7 +304,8 @@ dialog video { display:block; max-height:65svh; width:100%; }
         <label class="quiz-option"><input type="radio" name="channel" value="WeChat"> WeChat</label>
         <label class="quiz-option"><input type="radio" name="channel" value="Телефон" checked> Телефон</label>
       </div>
-      <label hidden><span>Ваш контакт</span><input type="text" name="messengerContact" maxlength="120" disabled></label>
+      <label><span>Телефон</span><input name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="40" pattern="\+?(?:[\s\(\)\-]*[0-9]){7,15}[\s\)]*" title="Введите номер из 7–15 цифр, можно с кодом страны" required placeholder="+7 900 123-45-67"></label>
+      <label hidden><span>Ваш контакт</span><input type="text" name="messengerContact" pattern=".*\S.*" maxlength="120" disabled></label>
       <label><input type="checkbox" name="personalDataConsent" value="yes" required>Даю согласие на обработку моих персональных данных в соответствии с политикой конфиденциальности.</label>
     </fieldset>
     <nav aria-label="Шаги подбора"><button type="button" class="quiz-back" hidden>Назад</button><button type="button" class="quiz-next">Далее</button><button type="submit" hidden>Отправить заявку</button></nav>
@@ -405,4 +405,4 @@ async function sendBooking(bookingForm) {
     submit.disabled = false;
   }
 }
-</script><script src="filmstrip.js?v=c2e5f3d472"></script><script src="quiz.js?v=094d0e6afb"></script></html>
+</script><script src="filmstrip.js?v=c2e5f3d472"></script><script src="quiz.js?v=f611ee36c6"></script></html>
