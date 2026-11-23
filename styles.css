@@ -529,7 +529,7 @@ footer.colophon { border-top:0; }
 }
 
 .illustrated {
- display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.18fr);
+ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);
  margin:clamp(80px,12.5vw,180px) var(--margin); background:#32211c; color:white;
 }
 .illustrated img { width:100%; height:auto; align-self:center; object-fit:contain; display:block; }
@@ -702,7 +702,6 @@ main :is(h1,h2,h3) { text-transform:uppercase; overflow-wrap:break-word; }
 .cover-intro p { font-size:clamp(17px,1.65vw,27px); line-height:1.38; }
 .cover-intro nav { margin-top:1.35em; justify-content:flex-start; }
 .front-page + .guide.spread { margin-top:clamp(54px,7vw,112px); }
-.candy-workshop .placard-copy :is(h2,h3) { font-size:clamp(30px,3.55vw,64px); }
 .illustrated .poster-description {
  margin:clamp(20px,2.3vw,38px) 0 0 clamp(10px,1.8vw,30px);
  border-left:3px solid currentColor; padding-left:1em;
@@ -722,7 +721,6 @@ main :is(h1,h2,h3) { text-transform:uppercase; overflow-wrap:break-word; }
  .cover-intro .meta,.cover-intro p {margin:0;}
  .cover-intro nav {grid-column:1/-1; margin:6px 0 0;}
  .cover-intro p {font-size:16px;}
- .candy-workshop .placard-copy :is(h2,h3) {font-size:clamp(27px,7vw,46px);}
 }
 
 .offer-poster,.field-note,.guest-column { border-block:4px double var(--ink); }
@@ -867,8 +865,10 @@ main .guest-column {
 #route .section-heading h2, #history-title, #workshop-title {font-size:clamp(32px,5.7vw,96px);}
 .workshop-section > .illustrated {margin:0;}
 
-.school-trip .placard-copy {container-type:inline-size;}
-.school-trip #school-heading {font-size:min(clamp(32px,4.4vw,78px),13.3cqi);}
+.illustrated .placard-copy {container-type:inline-size;}
+.candy-workshop .placard-copy {padding-inline:clamp(20px,3vw,48px);}
+@media(max-width:760px){.candy-workshop .placard-copy {padding-inline:24px;}}
+.illustrated :is(#school-heading,#workshop-heading) {font-size:min(clamp(32px,4.4vw,78px),13.3cqi);}
 
 @media (max-width:760px) {
  .cover-intro nav {display:grid;grid-template-columns:minmax(0,1fr);}
