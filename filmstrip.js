@@ -83,22 +83,11 @@ document.addEventListener('visibilitychange', updateStrip);
 const stack = document.querySelector('.stops');
 const sheets = stack.querySelectorAll('li');
 stack.style.setProperty('--step-count', sheets.length);
-sheets.forEach((sheet, index) => sheet.style.setProperty('--step-index', index));
 const page = document.querySelector("main");
 function measureSheets() {
+  if (getComputedStyle(sheets[0]).position !== 'sticky') return;
   const visibleHeight = Math.min(window.innerHeight, page.clientHeight);
   const headerHeight = document.querySelector('.masthead').offsetHeight;
-  const style = getComputedStyle(stack);
-  const edge = parseFloat(style.getPropertyValue('--stack-edge'));
-  if (Number.isFinite(edge)) {
-    const top = headerHeight + parseFloat(style.getPropertyValue('--stack-gap'));
-    const room = visibleHeight - top - edge * (sheets.length - 1) - 8;
-    stack.style.setProperty('--stack-top', top + 'px');
-    const tallest = Math.max(...Array.from(sheets, sheet => sheet.offsetHeight));
-    stack.toggleAttribute('data-short', tallest > room);
-    return;
-  }
-  stack.removeAttribute('data-short');
   const height = Math.max(...Array.from(sheets, sheet => sheet.offsetHeight));
   const lastInset = parseFloat(getComputedStyle(sheets[sheets.length - 1]).getPropertyValue('--sheet-top'));
   const firstInset = parseFloat(getComputedStyle(sheets[0]).getPropertyValue('--sheet-top'));

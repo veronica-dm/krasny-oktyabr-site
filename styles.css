@@ -151,7 +151,7 @@ main > .booking { margin-block-end:0; }
 
 .stops li:nth-child(4) { --sheet-top:40px; }
 .stops li:nth-child(5) { --sheet-top:48px; }
-@media(prefers-reduced-motion:no-preference) {
+@media (min-width:761px) and (hover:hover) and (prefers-reduced-motion:no-preference) {
  /* Отдельная строка даёт время прочесть последний шаг. У всех карточек общая точка открепления. */
  .stops::after {
   content:""; grid-row:calc(var(--step-count) + 1); height:clamp(120px,24svh,240px);
@@ -879,7 +879,7 @@ main .guest-column {
  .stops li {
   --copy-inset:clamp(12px,4vw,24px);
   grid-template-rows:auto 1fr auto;align-content:start;align-items:start;
-  column-gap:12px;row-gap:10px;padding:var(--copy-inset) 0 0;
+  column-gap:12px;row-gap:10px;padding:max(20px,var(--copy-inset)) 0 0;
  }
  .stops li::before {margin-inline-start:var(--copy-inset);}
  .stops .stop-copy {display:contents;}
@@ -888,20 +888,6 @@ main .guest-column {
  .stops .stop-photo {grid-column:1/-1;align-self:end;width:100%;height:auto;}
 }
 
-
-/* В мобильной стопке под меню видны равные полоски бумаги. */
-@media (max-width:760px) and (prefers-reduced-motion:no-preference) {
- .stops { --stack-edge:14px; --stack-gap:20px; }
- .stops li {
-  transform:translateY(calc(var(--step-index) * var(--stack-edge)));
-  padding-top:max(20px,var(--copy-inset));
-
- }
- .stops .stop-photo { width:100%; height:auto; }
- .stops[data-short] { grid-template-rows:none; }
- .stops[data-short] li { position:relative; top:auto; transform:none; max-height:none; }
- .stops[data-short]::after { display:none; }
-}
 
 @media (max-width:760px) {
  :root {--mobile-button-height:56px;}
@@ -967,6 +953,7 @@ main .guest-column {
 .quiz progress::-webkit-progress-value {background:var(--red);}
 .quiz progress::-moz-progress-bar {background:var(--red);}
 .quiz fieldset {margin:0;padding:0;border:0;min-width:0;}
+.quiz legend[tabindex="-1"]:focus {outline:none;}
 .quiz legend {font-size:clamp(23px,4vw,38px);line-height:1.08;text-transform:uppercase;margin-bottom:18px;}
 .quiz label {display:block;margin:8px 0;}
 .quiz .quiz-option {padding:10px 12px;border:1px solid #aaa;cursor:pointer;}
