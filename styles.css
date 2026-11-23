@@ -393,6 +393,8 @@ footer.colophon {
 }
 .contacts-columns h2 { max-width:13ch; }
 .contacts-columns p { margin:14px 0 0; }
+.footer-booking { align-self:center; display:grid; justify-items:start; gap:18px; }
+.footer-booking p { margin:0; max-width:38ch; }
 .contacts-columns address { align-self:start; font-style:normal; border-top:2px solid var(--ink); }
 .contacts-columns a {
  display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center;
